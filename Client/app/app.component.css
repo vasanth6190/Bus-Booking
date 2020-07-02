@@ -1,0 +1,10 @@
+.nav-link{
+    color:azure !important;
+}
+.nav-link:hover{
+    color:#ffc107 !important;
+}
+.navbar-brand:hover{
+    font-size: 21px !important;
+    color:#ffc107 !important
+}

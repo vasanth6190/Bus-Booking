@@ -1,0 +1,251 @@
+<!-- <div *ngIf="login===true"> -->
+<h1 class="text-center font-italic pb-1 pt-3 pb-0">Welcome To Optibus</h1>
+<hr style="border:1px solid #ffc107;width:40%"/>
+<div class="container pt-4">
+    <div class="row container mt-5">
+        <form #form="ngForm" (ngSubmit)="onsubmit(form)" class="form-group col-lg-5 col-sm-12 mb-5 border book border-red">
+    <h5 class="font-weight-bold text-center font-italic  mr-5 mt-4" style="color: red;">Book Bus Tickets</h5>
+    <div class="conatiner d-flex justify-content-between col-12 mt-4">
+        <div class="d-flex">
+        <label class="font-weight-bold font-italic mr-2 mt-1">From:</label>
+        <select required [class.is-invalid]="from.invalid&&from.touched" [class.is-valid]="from.valid&&from.touched" name="from" ngModel #from="ngModel" class="form-control" placeholder="From" style="border-top: 0;border-right: 0;border-left: 0;border-bottom: 1px solid grey;">
+            <option value="">Depart Place</option>
+            <option value="chennai">Chennai</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="kolkata">Kolkata</option>
+            <option value="delhi">Delhi</option>
+            <option value="hyderabad">Hyderabad</option>
+            <option value="bangalore">Bangalore</option>
+        </select>
+    </div>
+    <div class="d-flex">
+        <label class="font-weight-bold font-italic mr-2 mt-1">To:</label>
+        <select  style="border-top: 0;border-right: 0;border-left: 0;border-bottom: 1px solid grey;" required [class.is-invalid]="to.invalid&&to.touched" [class.is-valid]="to.valid&&to.touched" name="to" ngModel #to="ngModel" class="form-control">
+            <option value="">Arrival Place</option>
+            <option value="kolkata">Kolkata</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="chennai">Chennai</option>
+            <option value="delhi">Delhi</option>
+            <option value="hyderabad">Hyderabad</option>
+            <option value="bangalore">Bangalore</option>
+        </select>
+    </div>
+    </div>
+    <p *ngIf="display===true" class="text-center font-weight-bold mb-0 pb-0" style="font-size: 12px;color: red;">Depart And Arrival places are same</p>
+    <div>
+        <label class="font-weight-bold font-italic mt-4">Depart Date:</label>
+        <input style="border-top: 0;border-right: 0;border-left: 0;border-bottom: 1px solid gray;" required [class.is-invalid]="date.invalid&&date.touched" [class.is-valid]="date.valid&&date.touched" ngModel #date="ngModel" name="date" type="date" class="form-control"/>
+    </div>
+    <div *ngIf="busdetails.length===0 && yes===true">
+        <p class="text-center  font-weight-bold font-italic mt-3" style="font-size: 18px;color: red;">No Buses Available</p>
+</div>
+    <div class="d-flex justify-content-center m-5 pt-5">
+        <button [disabled]="form.invalid" class="btn btn-sm btn-warning px-5  font-weight-bold font-italic">Search Buses</button>
+    </div>
+</form>
+<div class="col-6 d-none d-lg-block  ml-5">
+   <p class="pb-0 mb-0 font-weight-bold font-italic pl-3 ">Offers Zone:</p>
+    <div class="d-flex justify-content-between  pt-3  pr-3 pl-3">
+    <div class="card offer ml-2" style="width: 15rem;height: 300px;">
+        <div class="d-flex justify-content-center pt-4 pb-4 bg-danger">
+        <img src="https://img.pngio.com/last-minute-offer-holiday-in-italy-in-may-agriturismo-i-moresani-10-off-png-306_301.png" style="height: 100px;width:130px;" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body p-2 mt-3">
+          <p class="card-text font-weight-normal font-italic text-justify px-3 text-black">10% offer on Delhi Enjoy at Delhi Sultanate.Explore more at Delhi by using this offer</p>
+        </div>
+      </div>
+      <div class="card offer ml-5" style="width: 15rem;height: 300px;">
+        <div class="d-flex justify-content-center pt-4 pb-4" style="background-color: #e7e4e4f7;">
+        <img src="https://www.pngmart.com/files/9/Special-Offer-Transparent-PNG.png" style="height: 100px;width:150px;" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body p-2 mt-3">
+          <p class="card-text font-weight-normal font-italic text-justify px-3 text-black">Visit Kolkata Enjoy 19% off to Kolkata.Explore more at Delhi by using this offer</p>
+        </div>
+      </div>
+      
+     </div>
+</div>
+</div>
+</div>
+<div *ngIf="yes===true && busdetails.length>0">
+    <p class="container text-left font-weight-bold font-italic" style="font-size: 20px;">Your Results:</p>
+    <div  *ngFor="let i of busdetails" class="container">
+        <div class="card container details my-5" style="width:auto;">
+            <div class="pt-3 pl-3 font-weight-bold font-italic text-danger" style="font-size: 20px;">{{i.name|uppercase}}</div>
+            <div class="card-body p-2 mt-3 d-lg-flex d-sm-inline-block justify-content-around">
+                <div style="width: 20%;">
+                <span class="font-weight-bold font-italic pr-2" style="font-size: 18px;">From:</span>
+                <p class="font-weight-normal" style="font-weight:bold;">{{i.from|titlecase}}</p>
+            </div>
+                <div style="width: 20%;">
+                    <span class="font-weight-bold font-italic pr-2" style="font-size: 18px;">To:</span>
+                <p class="font-weight-normal" style="font-weight:bold;">{{i.to|titlecase}}</p>
+            </div>
+            <div style="width: 23%;">
+                <span class="font-weight-bold font-italic pr-2" style="font-size: 18px;">Duration:</span>
+                <p class="font-weight-normal" style="font-weight:bold;">{{i.duration}}</p>
+            </div>
+            <div style="width: 20%;">
+                <span class="font-weight-bold font-italic pr-2" style="font-size: 18px;">Price:</span>
+                <p class="font-weight-normal" style="font-weight:bold;">{{i.rupees}}</p>
+            </div>
+            <div style="width: 25%;">
+                <span class="font-weight-bold font-italic pr-2" style="font-size: 18px;">Date:</span>
+                <p class="font-weight-normal" style="font-weight:bold;">{{i.date}}</p>
+            </div>
+            </div>
+            <div class="d-flex justify-content-end mr-5 mb-3">
+                <button class="btn btn-sm btn-warning font-weight-bold px-2 mr-3" data-toggle="modal" data-target="#exampleModal">Select Your seats</button>
+                <button class="btn btn-sm btn-primary font-weight-bold px-2 mr-3" data-toggle="modal" data-target="#exampleModalCenter">Add Passengers</button>
+                <button class="btn btn-sm btn-danger font-weight-bold px-2" (click)="addbook(i)">Book</button>
+                <!-- seat selection modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header  bg-danger  text-white">
+                          <h5 class="modal-title font-weight-bold font-italic" id="exampleModalLabel">Select Your seats</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body container d-flex justify-content-center">
+                        <div class="row">
+                            <!-- left side -->
+                               <div class="col-6">
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('16')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">16</p>
+                                    <p (click)="seatclick('15')" class="d-flex seat mb-0 justify-content-center font-weight-bold">15</p>
+                                </div>
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('14')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">14</p>
+                                    <p (click)="seatclick('13')" class="d-flex seat mb-0 justify-content-center font-weight-bold">13</p>
+                                </div>
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('12')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">12</p>
+                                    <p (click)="seatclick('11')" class="d-flex seat mb-0 justify-content-center font-weight-bold">11</p>
+                                </div>
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('10')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">10</p>
+                                    <p (click)="seatclick('9')" class="d-flex seat mb-0 justify-content-center font-weight-bold">9</p>
+                                </div>
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('8')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">8</p>
+                                    <p  (click)="seatclick('7')"class="d-flex seat mb-0 justify-content-center font-weight-bold">7</p>
+                                </div>
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('6')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">6</p>
+                                    <p (click)="seatclick('5')" class="d-flex seat mb-0 justify-content-center font-weight-bold">5</p>
+                                </div>
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('4')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">4</p>
+                                    <p (click)="seatclick('3')" class="d-flex seat mb-0 justify-content-center font-weight-bold">3</p>
+                                </div>
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('2')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">2</p>
+                                    <p (click)="seatclick('1')"  class="d-flex seat mb-0 justify-content-center font-weight-bold">1</p>
+                                </div>
+                               </div>
+                               <!-- right side -->
+                               <div class="col-6">
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('31')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">31</p>
+                                    <p (click)="seatclick('32')" class="d-flex seat mb-0 justify-content-center font-weight-bold">32</p>
+                                </div>
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('29')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">29</p>
+                                    <p (click)="seatclick('30')" class="d-flex seat mb-0 justify-content-center font-weight-bold">30</p>
+                                </div>
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('27')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">27</p>
+                                    <p (click)="seatclick('28')" class="d-flex seat mb-0 justify-content-center font-weight-bold">28</p>
+                                </div>
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('25')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">25</p>
+                                    <p (click)="seatclick('26')" class="d-flex seat mb-0 justify-content-center font-weight-bold">26</p>
+                                </div>
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('23')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">23</p>
+                                    <p (click)="seatclick('24')" class="d-flex seat mb-0 justify-content-center font-weight-bold">24</p>
+                                </div>
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('21')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">21</p>
+                                    <p (click)="seatclick('22')" class="d-flex seat mb-0 justify-content-center font-weight-bold">22</p>
+                                </div>
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('19')" class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">19</p>
+                                    <p (click)="seatclick('20')" class="d-flex seat mb-0  justify-content-center font-weight-bold">20</p>
+                                </div>
+                                <div class="d-flex my-1">
+                                    <p (click)="seatclick('17')"  class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">17</p>
+                                    <p (click)="seatclick('18')" class="d-flex seat mb-0 justify-content-center font-weight-bold">18</p>
+                                </div>
+                               </div>
+                        </div>
+                        </div>
+                        <p *ngIf="exceedseats===true" class="text-danger text-center font-weight-bold my-2">Seats exceeding Passengers limit</p>
+                        <div class="modal-footer">
+                            <div class="d-flex justify-content-start"> 
+                            <p class="font-weight-bold font-italic mr-2">Selected seats:</p>
+                            <div *ngFor="let i of seats">
+                                <p (click)="removeseat(i)"  class="d-flex seat mb-0 mr-1 justify-content-center font-weight-bold">{{i}}</p>
+                            </div>
+                        </div>
+                          <button type="button" class="btn btn-sm px-4 font-weight-bold btn-dark   " data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-sm px-4 font-weight-bold btn-primary"  data-dismiss="modal">Save</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- passengers model -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header bg-secondary">
+                          <h5 class="modal-title  text-white font-weight-bold " id="exampleModalLongTitle">Passengers Details</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                         <div class="container">
+                            <form class="form-inline" #form1="ngForm" (ngSubmit)="passengerscount(form1)">
+                               <input type="text" placeholder="No of Passengers" style="border-top: 0;border-right: 0;border-left: 0;border-bottom: 1px solid grey;" class="form-control" required  name="count" [class.is-invalid]="count.invalid && count.touched" [class.is-valid]="count.valid && count.untouched" #count="ngModel" ngModel/>
+                               <button [disabled]="form1.invalid" class="btn btn-sm btn-primary px-3 ml-2">Add</button>
+                            </form>
+                        
+                                <form class="form-group" #form2="ngForm">
+                                    <div *ngIf="countno > 0">
+                                        <h6 class="font-weight-bold tex-left my-2">Fill Passengers Details</h6>
+                                    <div *ngFor="let j of [].constructor(countno);let i = index">
+                                        <div class="d-flex my-3">
+                                              <input placeholder="Passenger {{i+1}} Name" type="text" #{{i+1}}="ngModel" ngModel class="form-control" name={{i+1}}/>
+                                        </div>
+                                        </div>
+                                </div>
+                                </form>
+                              
+                         </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-sm font-weight-bold btn-secondary" data-dismiss="modal">Exit</button>
+                          <button type="button" class="btn btn-sm font-weight-bold btn-danger" data-dismiss="modal" (click)="sub(form2)">Add Passengers</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+    </div>
+</div>
+<!-- </div> -->
+    
+<!-- <div *ngIf="login===false">
+    <div class="pt-5">
+    <h1 class="font-weight-bold text-center pt-5">Please Log in to continue</h1>
+    <div class="d-flex justify-content-center mt-4">
+    <button class="btn btn-sm btn-warning px-5 py-2 rounded font-weight-bold" routerLink="/login">CLick here to login</button>
+</div>
+</div>
+    </div> -->
+  
+

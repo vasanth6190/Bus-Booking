@@ -1,0 +1,35 @@
+
+<nav class="navbar navbar-expand navbar-dark py-3 bg-dark d-flex justify-content-between">
+    <div class="container">
+    <div class="d-flex">
+    <a class="navbar-brand font-weight-bold text-warning" routerLink="/index">OPTIBUS</a>
+    <div *ngIf="login===true">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a *ngIf="travels" class="nav-link font-weight-bold" routerLink="/travels">Home</a>
+          <a  *ngIf="user" class="nav-link font-weight-bold" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="travels" class="nav-link font-weight-bold" routerLink="/mybuses">Your Buses</a>
+          <a  *ngIf="user" class="nav-link font-weight-bold" routerLink="/mybookings">My Bookings</a>
+        </li>
+      </ul>
+    </div>
+</div>
+<div>
+    <div *ngIf="login===true" class="d-flex justify-content-around">
+        <div class="mr-2">
+        <p class="text-warning font-weight-bold">{{loggeduser.email.slice(0,6)}}...</p>
+    </div>
+    <div>
+   <button (click)="logout()" class="btn btn-sm  btn-primary text-white font-weight-bold">Logout</button>
+</div>    
+</div>
+   <div *ngIf="login===false" class="d-flex justify-content-around">
+    <button routerLink="/login" class="btn btn-sm  btn-primary text-white font-weight-bold">Login</button>
+    <button routerLink="/signup" class="btn btn-sm  btn-primary text-white font-weight-bold ml-3">SignUp</button>
+   </div>
+   </div>
+</div>
+  </nav>
+<router-outlet></router-outlet>

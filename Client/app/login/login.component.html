@@ -1,0 +1,26 @@
+<p class="text-center font-weight-normal mt-5 font-italic display-4">Login</p>
+<div class="d-flex justify-content-center">
+<form class="form-group mt-3 col-sm-4" #form="ngForm" (ngSubmit)="onsubmit(form)">
+   <select class="form-control mt-2" name="role" #role="ngModel" required ngModel [class.is-invalid]="role.invalid&&role.touched">
+      <option value="">Select Your role</option>
+      <option value="user">User</option>
+      <option value="travels">Travels</option>
+   </select>
+    <input required  type="text" #email="ngModel" [class.is-valid]="email.valid&&email.touched" [class.is-invalid]="email.invalid&&email.touched" ngModel  name="email" placeholder="Name" class="form-control mt-2"/>
+    <small class="text-danger font-weight-bold" [class.d-none]="email.valid||email.untouched">Email is required</small>
+    <input required type="password" #password="ngModel" [class.is-valid]="password.valid&&password.touched" ngModel [class.is-invalid]="password.invalid&&password.touched" ngModel name="password" placeholder="password" class="form-control mt-3"/>
+    <small class="text-danger font-weight-bold" [class.d-none]="password.valid||password.untouched">Password is required</small>
+    <div class="d-flex justify-content-center mt-2">
+      <div *ngIf="doesnt===true">
+         <p class="font-weight-bold text-center font-italic" style="color: red;">User doesn't exists</p>
+      </div>
+      <div *ngIf="pass===true">
+        <p class="font-weight-bold text-center font-italic" style="color: red;">Password doesn't match</p>
+     </div>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+    <button [disabled]="form.form.invalid" class="btn btn-sm btn-primary rounded font-weight-bold py-1 px-5">Login</button> 
+</div>
+<a routerLink="/signup" class="d-flex justify-content-center text-dark pt-2 font-weight-bold">New user click here</a>
+
+</form>

@@ -1,0 +1,50 @@
+<div *ngIf="login===true">
+<div *ngIf="travelbuses.length==0">
+    <p class="text-center font-weight-bold font-italic pt-5" style="font-size: 26px;">No Buses</p>
+    <div class="d-flex justify-content-center">
+    <button routerLink="/travels" class="btn btn-sm btn-warning px-3 mt-3 font-weight-bold">Add Buses</button>
+    </div>
+    </div>
+    
+    <div *ngIf="travelbuses.length>0">
+        <p class="text-center font-weight-bold font-italic pt-4" style="font-size:24px;">Your Buses</p>
+     <div class="container mt-3" *ngFor="let i of travelbuses">
+        <div class="card container details my-5" style="width:auto;">
+            <div class="pt-3 pl-3 font-weight-bold font-italic text-danger" style="font-size: 20px;">{{i.name|uppercase}}</div>
+            <div class="card-body p-2 mt-3 d-lg-flex d-sm-inline-block justify-content-around">
+                <div style="width: 20%;">
+                <span class="font-weight-bold font-italic pr-2" style="font-size: 18px;">From:</span>
+                <p class="font-weight-normal" style="font-weight:bold;">{{i.from|titlecase}}</p>
+            </div>
+                <div style="width: 20%;">
+                    <span class="font-weight-bold font-italic pr-2" style="font-size: 18px;">To:</span>
+                <p class="font-weight-normal" style="font-weight:bold;">{{i.to|titlecase}}</p>
+            </div>
+            <div style="width: 23%;">
+                <span class="font-weight-bold font-italic pr-2" style="font-size: 18px;">Duration:</span>
+                <p class="font-weight-normal" style="font-weight:bold;">{{i.duration}}</p>
+            </div>
+            <div style="width: 20%;">
+                <span class="font-weight-bold font-italic pr-2" style="font-size: 18px;">Price:</span>
+                <p class="font-weight-normal" style="font-weight:bold;">{{i.rupees}}</p>
+            </div>
+            <div style="width: 25%;">
+                <span class="font-weight-bold font-italic pr-2" style="font-size: 18px;">Date:</span>
+                <p class="font-weight-normal" style="font-weight:bold;">{{i.date}}</p>
+            </div>
+            </div>
+            <div class="d-flex justify-content-end mr-5 mb-3">
+                <button class="btn btn-sm btn-danger font-weight-bold px-4" (click)="delete(i)">Delete</button>
+            </div>
+          </div>
+     </div>
+    </div>
+    </div>
+    <div *ngIf="login===false">
+        <div class="pt-5">
+        <h1 class="font-weight-bold text-center pt-5">Please Log in to continue</h1>
+        <div class="d-flex justify-content-center mt-4">
+        <button class="btn btn-sm btn-warning px-5 py-2 rounded font-weight-bold" routerLink="/login">CLick here to login</button>
+    </div>
+    </div>
+        </div>

@@ -1,0 +1,31 @@
+<div *ngIf="login===true">
+    <h1 class="text-center font-italic pb-1 pt-3 pb-0">Welcome To Optibus</h1>
+    <hr style="border:1px solid #ffc107;width:40%"/>
+    <div class="d-flex  justify-content-center">
+    <div class="pt-2">
+<p class="text-center font-weight-bold font-italic" style="font-size: 20px;">Register buses to pave way with us</p>
+<form class="form-group" #form="ngForm" (ngSubmit)="onsubmit(form)">
+    <input type="text" #name="ngModel" ngModel placeholder="Bus Name" class="form-control my-2" name="name" required/>
+    <input type="text" #from="ngModel" ngModel placeholder="From" class="form-control my-2" name="from" required/>
+    <input type="text" #to="ngModel" ngModel placeholder="To" class="form-control my-2" name="to" required/>
+    <input type="text" #duration="ngModel" ngModel placeholder="Duration" class="form-control my-2" name="duration" required/>
+    <input type="text" #price="ngModel" ngModel placeholder="Price in Rs." class="form-control my-2" name="rupees" required/>
+    <input type="date" #date="ngModel" ngModel  class="form-control my-2" name="date" required/>
+    <div class="d-flex  justify-content-center">
+    <button [disabled]="form.invalid" class="btn btn-primary btn-sm font-weight-bold my-2  px-5 ">Add Bus</button>
+</div>
+</form>
+</div>
+</div>
+
+
+</div>
+
+<div *ngIf="login===false">
+    <div class="pt-5">
+    <h1 class="font-weight-bold text-center pt-5">Please Log in to continue</h1>
+    <div class="d-flex justify-content-center mt-4">
+    <button class="btn btn-sm btn-warning px-5 py-2 rounded font-weight-bold" routerLink="/login">CLick here to login</button>
+</div>
+</div>
+    </div>
